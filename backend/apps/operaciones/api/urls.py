@@ -1,0 +1,21 @@
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import (
+    OperacionViewSet, ClientViewSet, ShipViewSet, 
+    PortViewSet, AgencyViewSet, AgendaEventViewSet, TvDashboardView,
+    MotivoRechazoCatalogoViewSet
+)
+
+router = DefaultRouter()
+router.register(r'operations', OperacionViewSet, basename='operation')
+router.register(r'clients', ClientViewSet, basename='client')
+router.register(r'ships', ShipViewSet, basename='ship')
+router.register(r'ports', PortViewSet, basename='port')
+router.register(r'agencies', AgencyViewSet, basename='agency')
+router.register(r'events', AgendaEventViewSet, basename='event')
+router.register(r'motivos-rechazo-catalogo', MotivoRechazoCatalogoViewSet, basename='motivos-rechazo-catalogo')
+
+urlpatterns = [
+    path('tv-dashboard/', TvDashboardView.as_view(), name='tv-dashboard'),
+    path('', include(router.urls)),
+]
